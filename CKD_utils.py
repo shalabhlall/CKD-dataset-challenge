@@ -22,11 +22,8 @@ def data_augment(T_creatinine, T_DBP, T_SBP, T_glucose, T_ldl, T_HGB, T_demo, T_
                 drp = random.sample(range(ehd[(ehd['id']==idx)]['time'].count()-1), int(ehd[(ehd['id']==idx)]['time'].count()/4))
                 for j, ehd1 in enumerate([T_creatinine, T_DBP, T_SBP, T_glucose, T_ldl, T_HGB, T_demo, T_meds, T_stage]):
                     data = ehd1[ehd1['id']==idx]
-                    if i!=j:
-                        add_row = data
-                    else:
-                        for drp1 in drp:
-                            add_row = data.drop(data.loc[data.index==drp1].index, axis=0)
+                    for drp1 in drp:
+                        add_row = data.drop(data.loc[data.index==drp1].index, axis=0)
                     add_row['id']= counter+length
                     bcd[j] = bcd[j].append(add_row, ignore_index=True)
                 counter = counter+1
